@@ -8,13 +8,11 @@ export const useData = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("/public/data/instrumentos.json");
-
+        const response = await fetch("http://localhost:8080/instrumento/all");
         if (!response.ok) throw new Error("Error en la respuesta del servidor");
 
-        const { instrumentos } = await response.json();
-
-        setInstrumentos(instrumentos);
+        const data = await response.json();
+        setInstrumentos(data);
       } catch (e) {
         console.log(e);
         setError("Error al obtener los datos");

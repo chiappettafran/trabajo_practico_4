@@ -1,20 +1,23 @@
-import { CardInstrumentos } from "./components/CardInstrumentos";
-import { useData } from "./hooks/useData";
-import { Instrumento } from "./types/instrumentos.types";
+import { Outlet } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+import Header from './components/common/Header';
+import Footer from './components/common/Footer';
+import AppNavbar from './components/common/AppNavbar';
 
-export const App = () => {
-  const { instrumentos, error } = useData();
+function App() {
+    return (
+        <div className="d-flex flex-column min-vh-100">
+            <Header />
+            <div className="flex-grow-1">
+                <AppNavbar />
+                <main>
+                    <Outlet />
+                </main>
+            </div>
+            <Footer />
+        </div>
+    );
+}
 
-  return (
-    <div className="container mt-4">
-      <h2 className="mb-4">Instrumentos</h2>
-      {error && <p className="text-danger">{error}</p>}
-      {instrumentos.map((inst: Instrumento) => (
-        <CardInstrumentos
-          key={inst.id}
-          instrumento={inst}
-        />
-      ))}
-    </div>
-  );
-};
+export default App;

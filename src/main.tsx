@@ -1,10 +1,17 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import { App } from "./App.tsx";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { RouterProvider } from 'react-router-dom';
+import router from './routes';
 
-createRoot(document.getElementById("root")!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>
+const rootElement = document.getElementById('root');
+
+if (!rootElement) {
+    throw new Error("No se encontró el elemento con id 'root'");
+}
+
+ReactDOM.createRoot(rootElement).render(
+    <React.StrictMode>
+        <RouterProvider router={router} />
+    </React.StrictMode>
 );
